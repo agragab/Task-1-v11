@@ -2,6 +2,9 @@ const express = require('express');
 const mongoose = require('mongoose');
 const Product = require('./models/product.model.js');
 const productRoutes = require('./routes/product.route.js');
+const dns = require('dns');
+
+dns.setServers(['8.8.8.8', '1.1.1.1']);
 
 
 const app = express()
@@ -11,6 +14,7 @@ app.use(express.urlencoded({ extended: false }))
 
 //routes
 app.use('/api/products', productRoutes)
+app.use('/api/events', require('./routes/event.route.js'))
 
 
 
@@ -101,7 +105,7 @@ app.get('/', (req, res) => {
  
 
 
-mongoose.connect("your connection string")
+mongoose.connect("mongodb+srv://agamalabdelhameed_db_user:T5p5PLhn4laTxoNe@cluster0.yjmrdht.mongodb.net/?appName=Cluster0")
 .then(() => {
   console.log('Connected to MongoDB')
 })
